@@ -1,4 +1,4 @@
-import { VersioningType } from '@nestjs/common'
+import { ValidationPipe, VersioningType } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 
@@ -13,6 +13,12 @@ async function bootstrap() {
     origin: process.env.REQUEST_ORIGIN,
     credentials: true
   })
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true
+    })
+  )
 
   await app.listen(3000)
 }

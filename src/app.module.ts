@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
-import { SharedModule } from './shared/shared.module'
+import { AccountModule } from './account/account.module'
 
 @Module({
   imports: [
@@ -12,7 +12,7 @@ import { SharedModule } from './shared/shared.module'
     ConfigModule.forRoot({
       isGlobal: true
     }),
-    SharedModule
+    AccountModule
   ],
   controllers: [AppController],
   providers: [AppService]
