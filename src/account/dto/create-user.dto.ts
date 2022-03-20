@@ -6,6 +6,7 @@ import {
   MinLength
 } from 'class-validator'
 import { IsTaken } from '../decorators/is-taken.decorator'
+import { Match } from '../decorators/match.decorator'
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -36,4 +37,8 @@ export class CreateUserDto {
     message: 'please provide a more complex password'
   })
   password: string
+
+  @IsNotEmpty()
+  @Match(CreateUserDto, s => s.password)
+  confirmPassword: string
 }
