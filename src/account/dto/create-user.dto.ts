@@ -14,13 +14,13 @@ export class CreateUserDto {
   name: string
 
   @IsNotEmpty()
-  @MaxLength(20)
   @IsTaken()
+  @MaxLength(20)
   username: string
 
   @IsNotEmpty()
-  @IsEmail()
   @IsTaken()
+  @IsEmail()
   email: string
 
   /**
@@ -34,7 +34,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   @MinLength(8)
   @Matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/, {
-    message: 'please provide a more complex password'
+    message: 'Please provide a more complex password'
   })
   password: string
 

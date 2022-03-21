@@ -1,4 +1,9 @@
-import { ValidationPipe, VersioningType } from '@nestjs/common'
+import {
+  BadRequestException,
+  ValidationError,
+  ValidationPipe,
+  VersioningType
+} from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 
@@ -16,7 +21,14 @@ async function bootstrap() {
 
   app.useGlobalPipes(
     new ValidationPipe({
-      transform: true
+      exceptionFactory: (errors: ValidationError[]) => {
+        throw new BadRequestException(
+          errors.map(err => ({
+            field: err.property,
+            message: Object.values(err.constraints)
+          }))
+        )
+      }
     })
   )
 
